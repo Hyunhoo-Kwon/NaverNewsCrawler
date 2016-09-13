@@ -1,6 +1,6 @@
-### 네이버뉴스크롤러 & Jandi 웹훅
+## 네이버뉴스크롤러 & Jandi 웹훅
 
-####기능요구사항
+###기능요구사항
 네이버 뉴스를 1시간마다 확인 하여 새로운 뉴스가 확인 될 경우 메세지플랫폼(**Jandi)에 알림(웹훅)을 보내는 크롤러를 제작하려 합니다.
 * 수집
     * [여기](http://news.naver.com/main/history/mainnews/index.nhn?date=2016-08-30&time=02:00)에서 뉴스 수집을 진행합니다.
@@ -13,7 +13,7 @@
 * 웹훅(Webhook)
     * 웹훅(Webhook)이란 Jandi에 Jandi가 정한 포맷에 일치하는 데이터를 수신하여 지정된 대화에 메시지 형태로 전송해주는 기능을 말합니다.
 
-####알림 화면 예시
+###알림 화면 예시
 \* Jandi
 >naver_news
 
@@ -24,18 +24,46 @@
 > ...
 ![qwerty](./Image_NaverNewsClawer_Example.png)
 
-### Manual
-#### 실습 환경
+## Manual
+### 실습 환경
 * Server: Windows 10 (Intel PC)
 * Language: Python 3.5.2
 * Tool: Sublime Text3, SourceTree(GIT GUI)
 * pip install list: Beautiful Soup 4.5.1
 
-#### 실행 방법
+### 실행 방법
 > python NaverNewsCrawler.py
 
-#### Program Logic
+### Program Logic
 Beautiful Soup을 통해 설정해놓은 네이버 메인 뉴스를 크롤링하여 데이터를 반환.
 반환받은 뉴스 데이터를 Jandi 웹훅 주소로 HTTP POST request 전송.
 
+### Class & Function Define
+#### File name: NaverNewsCrawler.py
+>#####class NaverNewsCrawler(threading.Thread)
+* Description
+ * 크롤러가 시작되면 처음으로 작동하는 클래스.
+ * crawler.py모듈로 부터 데이터를 받아 전송에 필요한 데이터 설정 및 한시간 마다 Jandi로 메시지 전송.
 
+>def __init__(self):
+* Description
+ * 클래스 생성자. Jandi로 시작 알림 메시지 전송.
+* Return
+ * None
+
+>def run(self):
+* Description
+ * 클래스 생성자. Jandi로 시작 알림 메시지 전송.
+* Return
+ * None
+
+- - -
+#### File name: crawler.py
+* Description
+ * 네이버 뉴스를 확인 하여 뉴스 제목을 저장하는 크롤러 모듈.
+
+>def crawling(url):
+* Description
+ * url 주소(네이버 뉴스)의 HTML 정보 중 뉴스 제목만 presentNews에 저장.
+* Return
+ * presentNews
